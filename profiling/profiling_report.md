@@ -1,0 +1,2 @@
+this will be the report for each dataset
+they will each be ruan indidually using ydata profiling to get a look at the data in its as-is form , i will then evaluate the report and add it here , essentially creating a data dictiorny/profiling for each data set 
