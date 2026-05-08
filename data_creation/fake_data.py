@@ -44,7 +44,7 @@ class fake_member:
         return random.choice(status_map[key])
 
     def generate_fake_member_db():
-        fake.unique.clear()  # ✅ clear BEFORE generating
+        fake.unique.clear() 
         list_of_ids = [fake.unique.random_int(min=1, max=500) for i in range(500)]
         fake.unique.clear()
         table = []
@@ -83,7 +83,7 @@ class fake_member:
 class fake_book:
 
     def generate_fake_book():
-        fake.unique.clear()  # ✅ clear BEFORE generating
+        fake.unique.clear()  
         list_of_genres = [
             "Fantasy", "Science Fiction", "Mystery", "Thriller", "Romance",
             "Historical Fiction", "Horror", "Biography", "Self-Help",
@@ -124,12 +124,14 @@ class fake_book:
 class loans:
 
     def generate_loan():
-        fake.unique.clear()  # ✅ clear BEFORE generating
+        fake.unique.clear()  
         list_of_member_ids = [fake.unique.random_int(min=1, max=500) for i in range(120)]
         fake.unique.clear()
         list_of_book_ids   = [fake.unique.random_int(min=1, max=500) for i in range(120)]
         fake.unique.clear()
         list_of_loan_ids   = [fake.unique.random_int(min=1, max=120) for i in range(120)]
+        fake.unique.clear()
+        list_of_staff = [fake.unique.random_int(min=1, max=18) for i in range(18)]
         fake.unique.clear()
         late_options = ["Yes", "YES", "True", "1", "y"]
         no_options   = ["No", "NO", "False", "0", "N"]
@@ -147,7 +149,8 @@ class loans:
             loan["loan_date"]   = loan_date
             loan["dueDATE"]     = due_date
             loan["return_date"] = return_date
-            loan["late_fee"]    = random.choice(late_options) if return_date > due_date else random.choice(no_options)
+            loan["is_late"]    = random.choice(late_options) if return_date > due_date else random.choice(no_options)
+            loan["staff_id"] = random.choice(list_of_staff)
             loan_table.append(loan)
 
         df = pd.DataFrame(loan_table)
@@ -158,7 +161,7 @@ class loans:
 class staff:
 
     def generate_staff():
-        fake.unique.clear() \
+        fake.unique.clear() 
 
 
         
