@@ -4,11 +4,13 @@ CREATE TABLE location (
     state varchar(50),
     postcode varchar(10)
 
-)
+);
+
 
 CREATE TABLE members(
     id int NOT NULL PRIMARY KEY,
     full_name varchar(100),
+    email varchar(50),
     phone varchar(20),
     address varchar(100),
     date_of_birth date,
@@ -17,9 +19,8 @@ CREATE TABLE members(
     location_id int,
     CONSTRAINT FK_location FOREIGN KEY (location_id) REFERENCES location(id)
 
-
-
 );
+
 
 CREATE TABLE branch(
     id int NOT NULL PRIMARY KEY,
@@ -54,10 +55,7 @@ CREATE TABLE author(
     author_name varchar(100)
 
 
-
 );
-
-
 
 
 CREATE TABLE genre(
@@ -76,6 +74,7 @@ CREATE TABLE publisher(
 
 );
 
+
 CREATE TABLE books(
     id int NOT NULL PRIMARY KEY,
     title varchar(200),
@@ -92,7 +91,6 @@ CREATE TABLE books(
 );
 
 
-
 CREATE TABLE Loans(
     id int NOT NULL PRIMARY KEY,
     staff_id int,
@@ -105,7 +103,6 @@ CREATE TABLE Loans(
     CONSTRAINT FK_staff FOREIGN KEY (staff_id) REFERENCES staff(id),
     CONSTRAINT FK_book FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE RESTRICT,
     CONSTRAINT FK_member FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE RESTRICT
-
 
 );
 
