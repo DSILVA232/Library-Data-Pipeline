@@ -1,0 +1,155 @@
+version: 2
+
+models:
+  - name: fact_loans
+    columns:
+      - name: loan_id
+        tests:
+          - unique
+          - not_null
+          
+      - name: member_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_member')
+              field: member_id
+              severity: warn
+
+      - name: book_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_books')
+              field: book_id
+              severity: warn
+
+      - name: staff_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_staff')
+              field: staff_id
+              severity: warn
+
+
+  - name: dim_member
+    columns:
+      - name: member_id
+        tests:
+          - unique
+          - not_null
+
+      - name: location_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_location')
+              field: location_id
+              severity: warn
+
+
+  - name: dim_location
+    columns:
+      - name: location_id
+        tests:
+          - unique
+          - not_null
+
+
+  - name: dim_books
+    columns:
+      - name: book_id
+        tests:
+          - unique
+          - not_null
+
+      - name: isbn
+        tests:
+          - unique
+          - not_null
+
+      - name: author_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_author')
+              field: author_id
+              severity: warn
+
+      - name: genre_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_genre')
+              field: genre_id
+              severity: warn
+
+      - name: publisher_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_publisher')
+              field: publisher_id
+              severity: warn
+
+
+  - name: dim_author
+    columns:
+      - name: author_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_genre
+    columns:
+      - name: genre_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_publisher
+    columns:
+      - name: publisher_id
+        tests:
+          - unique
+          - not_null
+
+
+  - name: dim_staff
+    columns:
+      - name: staff_id
+        tests:
+          - unique
+          - not_null
+
+      - name: branch_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_branch')
+              field: branch_id
+              severity: warn
+
+      - name: role_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_role')
+              field: role_id
+              severity: warn
+
+
+  - name: dim_branch
+    columns:
+      - name: branch_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_role
+    columns:
+      - name: role_id
+        tests:
+          - unique
+          - not_null

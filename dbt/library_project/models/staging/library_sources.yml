@@ -1,0 +1,60 @@
+version: 2
+
+sources:
+  - name: library
+    database: LIBRARY_DB
+    schema: RAW
+    tables:
+      - name: BOOKS
+        columns:
+          - name: BOOK_ID
+            tests:
+              - not_null
+              - unique
+
+          - name: ISBN
+            tests:
+              - not_null
+              - unique
+
+
+      - name: LOANS
+        columns: 
+          - name: LOAN_ID
+            tests:
+              - not_null
+              - unique
+
+          - name: MEMBER_ID
+            tests: 
+              - not_null
+              
+            
+          - name: BOOK_ID
+            tests:
+              - not_null
+          
+          - name: STAFF_ID
+            tests:
+              - not_null
+      
+
+      - name: MEMBERS
+        columns:
+          - name: MEMBER_ID
+            tests:
+              - not_null
+              - unique
+          - name: MEMBERSHIP_STATUS
+            tests:
+              - accepted_values:
+                  values: ['Active', 'Inactive', 'Expired']
+
+          
+      - name: STAFF
+        columns:
+          - name: STAFF_ID
+            tests:
+              - not_null
+              - unique
+          
