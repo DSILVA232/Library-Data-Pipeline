@@ -1,0 +1,15 @@
+services:
+  spark-job:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./data_raw:/app/data_raw
+      - ./spark/output:/app/spark_output
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
+    ports:
+      - "4040:4040"

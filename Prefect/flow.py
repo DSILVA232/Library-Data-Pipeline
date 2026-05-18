@@ -18,8 +18,8 @@ ingestion_statements = [s.strip() for s in ingestion_sql.split(";") if s.strip()
 @task(retries=2, retry_delay_seconds=10)
 def run_spark():
     logger = get_run_logger()
-    logger.info("starting spark cleaning job")
-    subprocess.run(["python3", f"{SPARK_DIR}/cleaning.py"], check=True)
+    logger.info("starting spark cleaning job via docker")
+    subprocess.run(["docker-compose","up","--build","--abort-on-container-exit"],cwd =str(Path(__file__).parent.parent) , check=True)
     logger.info("spark cleaning complete")
 
 
@@ -53,6 +53,8 @@ def run_snowflake_ingestion():
 @task(retries=2, retry_delay_seconds=10)
 def run_dbt_snapshot():
     logger = get_run_logger()
+    logger.info("installing dbt packages")
+    subprocess.run(["dbt", "deps", "--project-dir", DBT_PROJECT_DIR], check=True)
     logger.info("running dbt snapshot")
     subprocess.run(["dbt", "snapshot", "--project-dir", DBT_PROJECT_DIR], check=True)
     logger.info("dbt snapshot complete")

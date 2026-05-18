@@ -10,9 +10,9 @@ from pyspark.sql.functions import try_to_date, coalesce, col, regexp_replace, wh
 
 # ── paths & session ───────────────────────────────────────────────────────────
 
-path = Path(__file__).parent.parent / "data_raw"
-output_path = Path(__file__).parent / "output" 
-output_path.mkdir(exist_ok=True)
+path = Path("/app/data_raw")
+output_path = Path("/app/spark_output") 
+
 
 spark = SparkSession.builder \
     .appName("library-pipeline") \
