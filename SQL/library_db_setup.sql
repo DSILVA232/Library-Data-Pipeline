@@ -55,8 +55,8 @@ CREATE STORAGE INTEGRATION s3_integration
   TYPE = EXTERNAL_STAGE
   STORAGE_PROVIDER = 'S3'
   ENABLED = TRUE
-  STORAGE_AWS_ROLE_ARN = '<YOUR_AWS_ROLE_ARN>'
-  STORAGE_ALLOWED_LOCATIONS = ('<YOUR_S3_BUCKET_URL>');
+  STORAGE_AWS_ROLE_ARN = '<YOUR_AWS_ROLE_ARN>' -- to find this follow the documenation provided by the link in the SQL/README
+  STORAGE_ALLOWED_LOCATIONS = ('<YOUR_S3_BUCKET_URL>'); -- to find this follow the documenation provided by the link in the SQL/README
 
 
 CREATE OR REPLACE FILE FORMAT my_parquet_format
@@ -65,7 +65,7 @@ TYPE = PARQUET;
 
 CREATE OR REPLACE STAGE my_s3_stage
     STORAGE_INTEGRATION = S3_INTEGRATION
-    URL = '<YOUR_S3_BUCKET_URL>/raw/'
+    URL = '<YOUR_S3_BUCKET_URL>/raw/' -- to find this follow the documenation provided by the link in the SQL/README
     FILE_FORMAT = my_parquet_format;
 
 
