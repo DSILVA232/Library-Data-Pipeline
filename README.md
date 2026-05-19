@@ -1,8 +1,10 @@
 # Library Data Pipeline
 
-An end to end EtLT pipeline built to ingest, clean, transform, and serve library data using a modern data stack. The focus of this project is the data engineering lifecycle — schema design, data quality, containerisation, and orchestration — with an emphasis on production minded engineering decisions over analytics.
+An end to end EtLT pipeline built to ingest, clean, transform, and serve library data using a modern data stack. The focus of this project is the data engineering lifecycle — schema design, data quality, containerisation, and orchestration — with production minded engineering decisions at every stage.
 
-The final output is a fully automated pipeline that ingests raw library data, cleans it at scale using PySpark, stages it in AWS S3, loads it into Snowflake, and transforms it into a normalised dimensional model using dbt. Orchestrated end to end by Prefect and monitored via Prefect Cloud.
+The final output is a fully automated pipeline that ingests raw library data, cleans it at scale using PySpark, stages it in AWS S3, loads it into Snowflake, and transforms it into a normalised dimensional model using dbt. The pipeline terminates in a Power BI dashboard connected directly to Snowflake, demonstrating the data is queryable and useful for business reporting. Orchestrated end to end by Prefect and monitored via Prefect Cloud.
+
+> **Local development** — install dependencies from `requirements-dev.txt` which includes profiling and development tools alongside the core pipeline dependencies. `requirements.txt` contains pipeline only dependencies used by Docker.
 
 ---
 
@@ -10,13 +12,13 @@ The final output is a fully automated pipeline that ingests raw library data, cl
 
 ![Architecture Diagram](docs/architecture.png)
 
-The pipeline follows an **EtLT pattern** — a lightweight transform before loading (PySpark handles data quality), followed by a heavier business logic transform inside the warehouse (dbt handles dimensional modelling). This is a deliberate design choice documented in the [Schema Decisions](docs/schema_decisions.md).
+The pipeline follows an **EtLT pattern** — a lightweight transform before loading (PySpark handles data quality), followed by a heavier business logic transform inside the warehouse (dbt handles dimensional modelling). This is a deliberate design choice documented in the [Pipeline Pattern](spark/README.md).
 
 ---
 
 ## Schema
 
-The warehouse uses a **Snowflake schema** (normalised dimensions) rather than a star schema. This decision was made because the library dataset has genuine sub-entities — books have authors, genres, and publishers; members have locations; staff have branches and roles. Collapsing these into flat dimensions would introduce redundancy. The full reasoning is documented in [Schema Decisions](docs/schema_decisions.md).
+The warehouse uses a **Snowflake schema** (normalised dimensions) rather than a star schema. This decision was made because the library dataset has genuine sub-entities — books have authors, genres, and publishers; members have locations; staff have branches and roles. Collapsing these into flat dimensions would introduce redundancy. The full reasoning is documented in [Schema Decisions](Schema/decisions.md).
 
 ![Schema Diagram](docs/schema.png)
 
@@ -73,8 +75,16 @@ Any failure at either stage stops the pipeline — Prefect marks the task as fai
 
 ---
 
-## How to run
+## Dataset
 
+The library dataset is synthetically generated using the Faker library — no real personal data is used. The generation script produces four CSV files (members, books, loans, staff) with intentional data quality issues including inconsistent formats, duplicate records, missing values, and mixed value representations. This mirrors the kind of messy real world data a pipeline would typically encounter.
+
+The dataset can be regenerated at any time to produce an identical or varied dataset. See [data_creation/README.md](data_creation/README.md) for full details on the generation script, the data model, and the intentional quality issues introduced.
+
+---
+## Project Setup
+
+Note that before project can be automatically executed infrastrucute setup needs to be performed 
 For full setup instructions see: [Instructions](Instructions.md)
 
 ```bash
@@ -97,7 +107,7 @@ The pipeline is set to manual trigger only as the library dataset is a one time 
 - **Snowflake** — cloud data warehouse
 - **dbt** — SQL transformation, testing, and documentation
 - **Prefect** — pipeline orchestration and monitoring
-- **Looker Studio** — dashboard and data visualisation
+- **Power BI** — dashboard connected to Snowflake for business reporting
 - **pytest** — unit testing for PySpark transform functions
 - **GitHub Actions** — CI on pull requests
 
@@ -105,7 +115,8 @@ The pipeline is set to manual trigger only as the library dataset is a one time 
 
 ## Project decisions
 
-- [Schema design decisions](docs/schema_decisions.md) — why Snowflake schema, how each table was designed, the staff connection decision, the date dimension tradeoff
+- [Schema design decisions](Schema/decisions.md) — why Snowflake schema, how each table was designed, the staff connection decision, the date dimension tradeoff
+- [Pipeline pattern](spark/README.md) — EtLT pattern explanation, where PySpark ends and dbt begins, why the boundary exists where it does
 - [Data profiling report](profiling/profiling_report.md) — as-is analysis of each dataset before cleaning, findings that shaped the cleaning strategy
 
 ---
