@@ -136,9 +136,12 @@ Runs unit tests for all PySpark transform functions.
 
 ```
 library/
+  data_creation/
+     fake_data.py
+     README.md
   data_raw/           raw CSV files (gitignored)
-  data_clean/         cleaned Parquet output (gitignored)
   spark/
+    output/           output paraqueet files gitignored
     cleaning.py       PySpark cleaning job
     s3_upload.py      boto3 S3 upload script
     README.md         EtLT pattern explanation
@@ -147,30 +150,30 @@ library/
     profiling_report.md
     reports/          HTML profiling reports (gitignored)
   dbt/
-    library/
+    library_project/
+      macros/
+        generate_schema_name.sql  this makes sure outputed schema names to snowflake are correct
       models/
         staging/      one view per source table
         marts/        dimension and fact models
       snapshots/      SCD Type 2 snap_members
       tests/          custom SQL tests
-  pipeline/
+  Prefect/
     flow.py           Prefect orchestration flow
-  sql/
+  SQL/
     library_db_setup.sql
-    storage_integration.sql
     ingestion.sql
   schema/
     DDL.sql           schema design reference (not executed)
-  docs/
-    schema_decisions.md
-    architecture.png
-    schema.png
-  tests/
-    test_transforms.py  pytest unit tests
+    decisions.md
+    snowflake_schema.jpg
+
+  tests/ (coming soon)
+    test_transforms.py  pytest unit tests (not yet added)
   docker/
     Dockerfile
-  docker-compose.yml
-  requirements.txt        pipeline dependencies
+    requirements.txt        pipeline dependencies
+  compose.yaml
   requirements-dev.txt    full dev dependencies
   .env                    credentials (gitignored)
   .gitignore
