@@ -2,7 +2,7 @@
 
 An end to end EtLT pipeline built to ingest, clean, transform, and serve library data using a modern data stack. The focus of this project is the data engineering lifecycle, schema design, data quality, containerisation, and orchestration with production minded engineering decisions at every stage.
 
-![Prefect Run](Prefect-Run.ppg)
+![Prefect Run](Prefect-Run.png)
 
 The final output is a fully automated pipeline that ingests raw library data, cleans it at scale using PySpark, stages it in AWS S3, loads it into Snowflake, and transforms it into a normalised dimensional model using dbt. The pipeline terminates in a Power BI dashboard connected directly to Snowflake, demonstrating the data is queryable and useful for business reporting. Orchestrated end to end by Prefect and monitored via Prefect Cloud.
 
