@@ -84,8 +84,8 @@ The dataset can be regenerated at any time to produce an identical or varied dat
 ---
 ## Project Setup
 
-Note that before project can be automatically executed infrastrucute setup needs to be performed 
-For full setup instructions see: [Instructions](instructions.md)
+Note that before project can be automatically executed infrastrucute setup needs to be performed.
+For full setup instructions refer to: [Instructions](instructions.md)
 
 ```bash
 # run the full pipeline
