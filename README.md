@@ -85,7 +85,7 @@ The dataset can be regenerated at any time to produce an identical or varied dat
 ## Project Setup
 
 Note that before project can be automatically executed infrastrucute setup needs to be performed 
-For full setup instructions see: [Instructions](Instructions.md)
+For full setup instructions see: [Instructions](instructions.md)
 
 ```bash
 # run the full pipeline
@@ -115,9 +115,9 @@ The pipeline is set to manual trigger only as the library dataset is a one time 
 
 ## Project decisions
 
-- [Schema design decisions](Schema/decisions.md) — why Snowflake schema, how each table was designed, the staff connection decision, the date dimension tradeoff
-- [Pipeline pattern](spark/README.md) — EtLT pattern explanation, where PySpark ends and dbt begins, why the boundary exists where it does
-- [Data profiling report](profiling/profiling_report.md) — as-is analysis of each dataset before cleaning, findings that shaped the cleaning strategy
+- [Schema design decisions](Schema/decisions.md): why Snowflake schema, how each table was designed, the staff connection decision, the date dimension tradeoff
+- [Pipeline pattern](spark/README.md):  EtLT pattern explanation, where PySpark ends and dbt begins, why the boundary exists where it does
+- [Data profiling report](profiling/profiling_report.md):  as is analysis of each dataset before cleaning, findings that shaped the cleaning strategy
 
 ---
 
