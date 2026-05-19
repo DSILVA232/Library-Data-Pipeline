@@ -4,7 +4,7 @@ An end to end EtLT pipeline built to ingest, clean, transform, and serve library
 
 The final output is a fully automated pipeline that ingests raw library data, cleans it at scale using PySpark, stages it in AWS S3, loads it into Snowflake, and transforms it into a normalised dimensional model using dbt. The pipeline terminates in a Power BI dashboard connected directly to Snowflake, demonstrating the data is queryable and useful for business reporting. Orchestrated end to end by Prefect and monitored via Prefect Cloud.
 
-> **Local development** — install dependencies from `requirements-dev.txt` which includes profiling and development tools alongside the core pipeline dependencies. `requirements.txt` contains pipeline only dependencies used by Docker.
+> **Local development**: install dependencies from `requirements-dev.txt` which includes profiling and development tools alongside the core pipeline dependencies. `requirements.txt` contains pipeline only dependencies used by Docker.
 
 ---
 
