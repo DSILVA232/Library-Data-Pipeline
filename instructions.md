@@ -53,6 +53,8 @@ SNOWFLAKE_SCHEMA=RAW
 
 This file is gitignored and should never be committed.
 
+For full env file example look in .env-example fil in main dir : [.env_example](https://app.prefect.io)
+
 ---
 
 ## 4. Set up Snowflake infrastructure
