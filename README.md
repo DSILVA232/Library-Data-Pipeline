@@ -10,7 +10,7 @@ The final output is a fully automated pipeline that ingests raw library data, cl
 
 ## Architecture
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram]("Project architecture.jpg")
 
 The pipeline follows an **EtLT pattern** — a lightweight transform before loading (PySpark handles data quality), followed by a heavier business logic transform inside the warehouse (dbt handles dimensional modelling). This is a deliberate design choice documented in the [Pipeline Pattern](spark/README.md).
 
@@ -20,7 +20,7 @@ The pipeline follows an **EtLT pattern** — a lightweight transform before load
 
 The warehouse uses a **Snowflake schema** (normalised dimensions) rather than a star schema. This decision was made because the library dataset has genuine sub-entities — books have authors, genres, and publishers; members have locations; staff have branches and roles. Collapsing these into flat dimensions would introduce redundancy. The full reasoning is documented in [Schema Decisions](Schema/decisions.md).
 
-![Schema Diagram](docs/schema.png)
+![Schema Diagram](Schema/snowflake_schema.jpg)
 
 ---
 
