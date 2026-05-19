@@ -10,7 +10,7 @@ The final output is a fully automated pipeline that ingests raw library data, cl
 
 ## Architecture
 
-![Architecture Diagram]("Project architecture.jpg")
+![Architecture Diagram](Project architecture.jpg)
 
 The pipeline follows an **EtLT pattern** — a lightweight transform before loading (PySpark handles data quality), followed by a heavier business logic transform inside the warehouse (dbt handles dimensional modelling). This is a deliberate design choice documented in the [Pipeline Pattern](spark/README.md).
 
