@@ -60,7 +60,7 @@ Validation happens at two stages:
 - `accepted_values` on `membership_status`
 - Custom SQL tests: loan date integrity, is_late flag correctness, total copies non-negative, year published not in future
 
-Any failure at either stage stops the pipeline — Prefect marks the task as failed and halts downstream execution.
+Any failure at either stage stops the pipeline. Prefect marks the task as failed and halts downstream execution.
 
 ---
 
